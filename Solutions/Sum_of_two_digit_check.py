@@ -1,10 +1,10 @@
-class SumOfTwoDigitCheck(list_input, digit):
+class SumOfTwoDigitCheck():
 
-    def __init__(self):
+    def __init__(self, list_number, digit):
         self.list_number = list_number
         self.digit = digit
 
-    def sort_method_mine(self):
+    def sort_first_method(self):
         list_sorted = sorted(self.list_number)
         left_limit = 0
         right_limit = len(self.list_number) - 1
@@ -31,9 +31,9 @@ class SumOfTwoDigitCheck(list_input, digit):
     def min_max_method(self):
         while self.list_number:
             lowest_digit = min(self.list_number)
-            highest_digit = max(list_number)
+            highest_digit = max(self.list_number)
             sum_in_iteration = lowest_digit + highest_digit
-            if sum_in_iteration == digit:
+            if sum_in_iteration == self.digit:
                 return True
             elif sum_in_iteration < self.digit:
                 self.list_number.remove(lowest_digit)
@@ -43,12 +43,13 @@ class SumOfTwoDigitCheck(list_input, digit):
 
 
 if __name__ == "__main__":
-    list_input = [int(x) for x in raw_input("Input the list separated by spaces").strip().split()]
-    digit_input = input("Enter the number to search")
+    digit_input = 0
+    list_input = [int(x) for x in input("Input the list separated by spaces").strip().split()]
+    digit_input = int(input("Enter the number to search"))
     checker_class = SumOfTwoDigitCheck(list_input, digit_input)
-    print("My method with sort")
-    print sort_method_mine()
+    print("method with sort")
+    print (checker_class.sort_first_method())
     print("check sum pair method")
-    print check_sum_pair()
+    print (checker_class.check_sum_pair())
     print("Min Max Method")
-    print min_max_method()
+    print (checker_class.min_max_method())
