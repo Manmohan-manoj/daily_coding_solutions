@@ -1,0 +1,66 @@
+import random
+
+
+class COWnBULL:
+
+    def __init__(self):
+        self.cow = 0
+        self.bull = 0
+        self.inputs = ""
+
+    def input(self, ):
+        play = True
+        while play:
+            self.inputs = raw_input("Enter a 4 digit number: ")
+            length_of_input = len(self.inputs)
+            if length_of_input == 4:
+                play = False
+            else:
+                print ("not a 4 digit number")
+
+    def check(self, result_numbers):
+        check_flag = 0   # check_flag values are (0,1,2) which are (default,cow,bull)
+        for a in range(0, 4):
+            for b in range(0, 4):
+                if self.inputs[b] == result_numbers[a]:
+                    if a == b:
+                        check_flag = 1
+                        break
+                    check_flag = 2
+
+            if check_flag == 1:  # if cow
+                self.cow += 1
+                check_flag = 0
+
+            if check_flag == 2:  # if bull
+                self.bull += 1
+                check_flag = 0
+
+    def printer(self):
+
+        if self.cow == 4:
+            print("Correct!!")
+            return 1
+        else:
+            print ("Cow: " + str(self.cow) + " | Bull: " + str(self.bull))
+            return 0
+
+    def clear(self):
+
+        self.cow = 0
+        self.bull = 0
+
+
+if __name__ == "__main__":
+    length = 10  # number of tried
+    length_counter = 0
+    Num = COWnBULL()
+    NumberIn = str(random.randint(0, 9999))
+    for length_counter in range(1, length+1):
+        Num.input()
+        Num.check(NumberIn)
+        if Num.printer():
+            break
+        Num.clear()
+    if length_counter == length:
+        print "Game over, The number was: " + NumberIn
