@@ -1,0 +1,48 @@
+class Fibonacci(object):
+
+    def __init__(self, number_input=0):
+        self.number = number_input
+
+    @staticmethod
+    def factorial(n):
+        if n == 0:
+            return 1
+        res = n
+        i = n - 1
+        while i > 0:
+            res = res * i
+            i -= 1
+        return res
+
+    def binomial(self, n, k):
+        result = self.factorial(n) / (self.factorial(k) * self.factorial(n - k))
+        return result
+
+    def binomial_method(self):
+        i = (self.number - 1) / 2
+        result = 0
+        for k in range(0, i + 1):
+            n = self.number - k - 1
+            result = result + self.binomial(n, k)
+        return result
+
+    def list_method(self):
+        first = 0
+        second = 1
+        result = [first, second]
+        counter = 0
+        while counter <= self.number:
+            result_temp = first + second
+            first = second
+            second = result_temp
+            result.append(result_temp)
+            counter += 1
+        return result[self.number]
+
+
+if __name__ == "__main__":
+    input_number = input("input N: ")
+    NthFibonacci = Fibonacci()
+    NthFibonacci.number = input_number
+    print NthFibonacci.binomial_method()
+    print NthFibonacci.list_method()
