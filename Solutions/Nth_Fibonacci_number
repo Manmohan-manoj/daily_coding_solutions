@@ -1,7 +1,8 @@
 class Fibonacci(object):
 
     def __init__(self, number_input=0):
-        self.number = number_input
+        self.number = abs(number_input)
+        self.negative = True if number_input < 0 else False
 
     @staticmethod
     def factorial(n):
@@ -24,6 +25,8 @@ class Fibonacci(object):
         for k in range(0, i + 1):
             n = self.number - k - 1
             result = result + self.binomial(n, k)
+        if self.negative:
+            return 0 - result
         return result
 
     def list_method(self):
@@ -37,12 +40,18 @@ class Fibonacci(object):
             second = result_temp
             result.append(result_temp)
             counter += 1
+        if self.negative:
+            return (0 - result[self.number])
         return result[self.number]
 
 
 if __name__ == "__main__":
-    input_number = input("input N: ")
-    NthFibonacci = Fibonacci()
-    NthFibonacci.number = input_number
-    print NthFibonacci.binomial_method()
-    print NthFibonacci.list_method()
+    input_number = input("input a positive N: ")
+    try:
+        input_number = int(input_number)
+    except ValueError:
+        print("Not an integer")
+
+    NthFibonacci = Fibonacci(input_number)
+    print "Binomial equation method: ", NthFibonacci.binomial_method()
+    print "Method using a list: ", NthFibonacci.list_method()
