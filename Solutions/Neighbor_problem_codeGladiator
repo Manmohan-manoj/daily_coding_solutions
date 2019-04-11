@@ -1,0 +1,52 @@
+def main():
+    T = input()
+    for _ in range(T):
+        N = input()
+        list = [int(x) for x in raw_input().strip().split()]
+        list1 = []
+        list2 = []
+        tempsum = 0
+        tempsum2 = 0
+        tempdigit = []
+        tempdigit2 = []
+        maxim = max(list)
+        # creating two lists
+        for i in range(0, N):
+            if list[i] <= 0:
+                continue
+            elif i % 2 == 0:
+                list1.append(list[i])
+            else:
+                list2.append(list[i])
+        # sum of list1 calculation
+        for i in range(0, len(list1)):
+            for k in range(i + 1, len(list1)):
+                if tempsum < list1[i] + list1[k]:
+                    tempdigit = [list1[k], list1[i]]
+                    tempsum = list1[i] + list1[k]
+                elif tempsum == list1[i] + list1[k]:
+                    if min(list1[i], list[k]) > min(list1[tempdigit[0]], list1[tempdigit[1]]):
+                        tempdigit = [list1[k], list[i]]
+        # sum of list 2 calculation
+        for i in range(0, len(list2)):
+            for k in range(i + 1, len(list2)):
+                if tempsum2 < list2[i] + list2[k]:
+                    tempdigit2 = [list2[k], list2[i]]
+                    tempsum2 = list2[i] + list2[k]
+                elif tempsum2 == list2[i] + list2[k]:
+                    if min(list2[i], list2[k]) > min(list2[tempdigit2[0]], list2[tempdigit2[1]]):
+                        tempdigit2 = [list1[k], list1[i]]
+        if tempsum <= maxim and tempsum2 <= maxim:
+            print maxim
+        elif tempsum == tempsum2:
+            if (min(tempdigit[0], tempdigit[1]) > min(tempdigit2[0], tempdigit2[1])):
+                print "{0}{1}".format(tempdigit[0], tempdigit[1])
+            else:
+                print "{0}{1}".format(tempdigit2[0], tempdigit2[1])
+        elif tempsum > tempsum2:
+            print "{0}{1}".format(tempdigit[0], tempdigit[1])
+        else:
+            print "{0}{1}".format(tempdigit2[0], tempdigit2[1])
+
+
+main()
